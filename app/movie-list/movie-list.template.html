@@ -1,4 +1,3 @@
-<p>This is the partial for view 1.</p>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
@@ -21,7 +20,11 @@
       <!-- Body content -->
       <ul class="movies">
         <li class="movie-list-item"
-            ng-repeat="movie in $ctrl.movies | filter:$ctrl.query | orderBy:$ctrl.orderProp as filtered">
+            ng-repeat="movie in $ctrl.movies
+              | filter:$ctrl.query
+              | orderBy:$ctrl.orderProp
+              as filtered track by $index"
+        >
           <p>{{movie.title}}</p>
           <p>{{movie.year}}</p>
         </li>

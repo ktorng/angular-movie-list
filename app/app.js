@@ -4,7 +4,10 @@
 angular
   .module('myMovieList', [
     'ngRoute',
-    'movieList'
+    'core',
+    'LocalStorageModule',
+    'movieList',
+    'addMovie'
   ])
   .config([
     '$locationProvider',
@@ -15,6 +18,9 @@ angular
       $routeProvider
         .when('/movies', {
           template: '<movie-list></movie-list>'
+        })
+        .when('/add-movie', {
+          template: '<add-movie></add-movie>'
         })
         .otherwise({redirectTo: '/movies'});
     }
