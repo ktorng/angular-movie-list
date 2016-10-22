@@ -1,7 +1,8 @@
 'use strict';
 
+// core movie service to provide access to movie data in local storage
 angular
-  .module('core.movie', ['LocalStorageModule'])
+  .module('core.movie')
   .factory('Movie', function(localStorageService) {
     // movie list
     const movieList = localStorageService.get('movies') ||

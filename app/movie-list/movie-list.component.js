@@ -2,7 +2,7 @@
 
 // register `movieList` component, along with its associated template and controller
 angular
-  .module('movieList', ['ngRoute', 'core.movie'])
+  .module('movieList')
   .component('movieList', {
     templateUrl: 'movie-list/movie-list.template.html',
     controller: ['Movie',

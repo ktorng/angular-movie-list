@@ -1,14 +1,8 @@
 'use strict';
 
-// declare app level module which depends on views, and components
+// configure $route service
 angular
-  .module('myMovieList', [
-    'ngRoute',
-    'core',
-    'LocalStorageModule',
-    'movieList',
-    'addMovie'
-  ])
+  .module('myMovieList')
   .config([
     '$locationProvider',
     '$routeProvider',

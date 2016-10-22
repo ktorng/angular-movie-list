@@ -2,7 +2,7 @@
 
 // register 'addMovie' component
 angular
-  .module('addMovie', ['ngRoute', 'core.movie'])
+  .module('addMovie')
   .component('addMovie', {
     templateUrl: 'add-movie/add-movie.template.html',
     controller: ['Movie',
