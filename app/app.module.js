@@ -4,6 +4,7 @@
 angular
   .module('myMovieList', [
     'ngRoute',
+    'ngMaterial',
     'core',
     'LocalStorageModule',
     'movieList',

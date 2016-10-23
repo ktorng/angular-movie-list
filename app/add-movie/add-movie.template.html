@@ -1,53 +1,12 @@
-<!-- form to create new movie entries -->
-<div class="container-fluid">
-  <div class="jumbotron text-center">
-    <h1>Add a Movie</h1>
-  </div>
-  <div id="add-form" class="row">
-    <div class="col-md-8 col-md-offset-2 text-center">
-      <form>
-        <div class="form-group">
-          <!-- bind values to formData in angular -->
-          <input
-            type="text"
-            class="form-control input-lg text-center"
-            placeholder="Title"
-            ng-model="$ctrl.formData.title"
-          />
-          <input
-            type="text"
-            class="form-control input-lg text-center"
-            placeholder="Genre"
-            ng-model="$ctrl.formData.genre"
-          />
-          <input
-            type="text"
-            class="form-control input-lg text-center"
-            placeholder="Cast"
-            ng-model="$ctrl.formData.cast"
-          />
-          <input
-            type="number"
-            min="1800"
-            max="2100"
-            class="form-control input-lg text-center"
-            placeholder="Release Year"
-            ng-model="$ctrl.formData.year"
-          />
-          <input
-            type="number"
-            min="1"
-            max="10"
-            class="form-control input-lg text-center"
-            placeholder="Rating"
-            ng-model="$ctrl.formData.rating"
-          />
-          <!-- addTodo() will create new movie entry -->
-        </div>
-          <button type="submit" class="btn btn-primary btn-lg" ng-click="$ctrl.addMovie()">
-            Submit
-          </button>
-        </form>
+<div layout="column" ng-cloak class="md-inline-form">
+
+  <md-content layout-gt-sm="row" layout-padding>
+    <div>
+      <md-input-container>
+        <label>Enter full movie title</label>
+        <input ng-model="$ctrl.formData.title">
+      </md-input-container>
     </div>
-  </div>
+  </md-content>
+
 </div>

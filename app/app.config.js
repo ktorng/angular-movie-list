@@ -1,6 +1,6 @@
 'use strict';
 
-// configure $route service
+// configure app module
 angular
   .module('myMovieList')
   .config([
@@ -11,10 +11,10 @@ angular
 
       $routeProvider
         .when('/movies', {
-          template: '<movie-list></movie-list>'
+          template: '<movie-list flex layout="column"></movie-list>'
         })
         .when('/add-movie', {
-          template: '<add-movie></add-movie>'
+          template: '<add-movie flex layout="column"></add-movie>'
         })
         .otherwise({redirectTo: '/movies'});
     }

@@ -1,40 +1,53 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      <!-- Sidebar content -->
-      <p>
-        Search:
-        <input ng-model="$ctrl.query" />
-      </p>
+<!-- Container #1 (see wireframe) -->
+<md-toolbar>
+<h1>My Movie List</h1>
+</md-toolbar>
 
-      <p>
-        Sort by:
-        <select ng-model="$ctrl.orderProp">
-          <option value="title">Title</option>
-          <option value="year">Release Year</option>
-        </select>
-      </p>
+<!-- Container #2 -->
+<div flex layout="row">
 
-    </div>
-    <div class="col-md-10">
-      <!-- Body content -->
-      <ul class="movies">
-        <li class="movie-list-item"
-            ng-repeat="movie in $ctrl.movies
-              | filter:$ctrl.query
-              | orderBy:$ctrl.orderProp
-              as filtered track by $index"
-        >
-          <h4>{{movie.title}}</h4>
-          <p>Year: {{movie.year}}</p>
-          <p>Genre: {{movie.genre}}</p>
-          <p>Cast: {{movie.cast}}</p>
-          <p>Rating: {{movie.rating ? movie.rating + '/10' : 'unrated'}}</p>
-        </li>
-      </ul>
+  <!-- Container #3 -->
+  <md-sidenav
+    layout="column"
+    class="md-sidenav-left md-whiteframe-z2"
+    md-component-id="left"
+    md-is-locked-open="$mdMedia('gt-md')"
+  >
+    <!-- Sidebar content -->
+    <p>
+      Search:
+      <input ng-model="$ctrl.query" />
+    </p>
 
-      <p>Total number of movies: {{filtered.length}}</p>
+    <p>
+      Sort by:
+      <select ng-model="$ctrl.orderProp">
+        <option value="title">Title</option>
+        <option value="year">Release Year</option>
+      </select>
+    </p>
+  </md-sidenav>
 
-    </div>
-  </div>
+  <!-- Container #4 -->
+  <md-content flex id="content">
+  <!-- Body content -->
+  <md-list class="movies">
+    <md-list-item class="movie-list-item"
+        ng-repeat="movie in $ctrl.movies
+          | filter:$ctrl.query
+          | orderBy:$ctrl.orderProp
+          as filtered track by $index"
+    >
+      <h4>{{movie.title}}</h4>
+      <p>Year: {{movie.year}}</p>
+      <p>Genre: {{movie.genre}}</p>
+      <p>Cast: {{movie.cast}}</p>
+      <p>Rating: {{movie.rating ? movie.rating + '/10' : 'unrated'}}</p>
+    </li>
+  </md-list>
+
+  <p>Total number of movies: {{filtered.length}}</p>
+
+  </md-content>
+
 </div>
