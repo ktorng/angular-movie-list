@@ -25,8 +25,11 @@
               | orderBy:$ctrl.orderProp
               as filtered track by $index"
         >
-          <p>{{movie.title}}</p>
-          <p>{{movie.year}}</p>
+          <h4>{{movie.title}}</h4>
+          <p>Year: {{movie.year}}</p>
+          <p>Genre: {{movie.genre}}</p>
+          <p>Cast: {{movie.cast}}</p>
+          <p>Rating: {{movie.rating ? movie.rating + '/10' : 'unrated'}}</p>
         </li>
       </ul>
 

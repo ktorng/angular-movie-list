@@ -2,41 +2,27 @@
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('my app', function() {
+describe('MyMovieList app', function() {
 
-
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
+  it('should redirect `index.html` to `index.html#!/movies`', function() {
     browser.get('index.html');
-    expect(browser.getLocationAbsUrl()).toMatch("/view1");
+    expect(browser.getLocationAbsUrl()).toMatch("/movies");
   });
 
 
-  describe('view1', function() {
+  describe('View: Movie list', function() {
 
     beforeEach(function() {
-      browser.get('index.html#!/view1');
+      browser.executeScript('return window.localStorage.clear();')
+      browser.get('index.html#!/movies');
     });
 
+    it('should filter the movie list as a user types into the search box', function() {
+      var movieList = element.all(by.repeater('movie in $ctrl.movies'));
+      var query = element(by.model('$ctrl.query'));
 
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
-    });
-
-  });
-
-
-  describe('view2', function() {
-
-    beforeEach(function() {
-      browser.get('index.html#!/view2');
-    });
-
-
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 2/);
     });
 
   });
+
 });

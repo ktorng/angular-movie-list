@@ -9,9 +9,10 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
-      'movie-list/*.js',
-      'movie-list/*.spec.js',
-      '!(bower_components)/**/*.js'
+      '**/*.module.js',
+      '*!(.module|.spec).js',
+      '!(bower_components)/**/*!(.module|.spec).js',
+      '**/*.spec.js'
     ],
 
     autoWatch: true,

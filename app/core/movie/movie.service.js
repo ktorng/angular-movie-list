@@ -5,11 +5,7 @@ angular
   .module('core.movie')
   .factory('Movie', function(localStorageService) {
     // movie list
-    const movieList = localStorageService.get('movies') ||
-      [{
-        title: 'dummy title 1',
-        year: 2000
-      }];
+    const movieList = localStorageService.get('movies') || [];
 
     return {
       // return list of movies
