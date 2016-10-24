@@ -35,7 +35,7 @@
       Sort by:
       <select ng-model="$ctrl.orderProp">
         <option value="Title">Title</option>
-        <option value="myRating">Rating</option>
+        <option value="-myRating">Rating</option>
         <option value="-Released">Newest</option>
       </select>
     </p>
@@ -57,10 +57,11 @@
           ng-class="{
             'rating-high': movie.myRating >= 8,
             'rating-med': movie.myRating >= 5 && movie.myRating < 8,
-            'rating-low': movie.myRating < 5,
+            'rating-low': movie.myRating >= 0 && movie.myRating < 5,
+            'rating-none': movie.myRating === -1
           }"
         >
-          {{movie.myRating ? movie.myRating : 'N/A'}}
+          {{movie.myRating > -1 ? movie.myRating : 'N/A'}}
         </span>
         <p flex="90">{{movie.Title}}</p>
       </li>

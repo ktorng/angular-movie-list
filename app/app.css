@@ -68,3 +68,8 @@ md-toolbar .md-button.md-default-theme {
   background-color: #f00;
   color: white;
 }
+
+.rating-none {
+  background-color: #ccc;
+  color: white;
+}
