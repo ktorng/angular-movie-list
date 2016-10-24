@@ -16,8 +16,7 @@ md-toolbar .md-button.md-default-theme {
 }
 
 .movie-poster {
-  float: left;
-  width: 150px;
+  width: 100%;
   margin-right: 10px;
 }
 
@@ -33,6 +32,10 @@ md-toolbar .md-button.md-default-theme {
   color: #BDBDBD;
 }
 
-.movie-info > span {
+.movie-info {
+  padding-left: 15px;
+}
+
+.movie-info .divider {
   color: #BDBDBD;
 }

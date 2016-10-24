@@ -57,66 +57,69 @@
 
   <!-- Movie details -->
   <md-content flex class="details">
-    <div ng-if="$ctrl.details.Response === 'True'">
-      <img
-        class="movie-poster"
-        ng-src="{{$ctrl.details.Poster === 'N/A'
-                  ? 'http://placehold.it/150x220&text=N/A'
-                  : $ctrl.details.Poster}}"
-      >
-      <span class="movie-title">
-        <a href="http://imdb.com/title/{{ $ctrl.details.imdbID }}" target="_blank">
-          {{$ctrl.details.Title}}
-        </a>
-      </span> ({{$ctrl.details.Year}})
-
-      <p class="movie-info">
-        {{$ctrl.details.Rated}}
-        <span>|</span>
-        {{$ctrl.details.Genre }}
-        <span>|</span>
-        {{$ctrl.details.Runtime}}
-        <span>|</span>
-        {{$ctrl.details.Released}}
-      </p>
-
-      <p>{{ $ctrl.details.Plot }}</p>
-
-      <p class="outer-p">
-        <div class="inner-p">
-          <span class="label label-primary">Director:</span> {{$ctrl.details.Director}}
+    <div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True'">
+      <div flex="40" layout="row">
+        <div flex="20">
+          <img
+            class="movie-poster"
+            ng-src="{{$ctrl.details.Poster === 'N/A'
+                      ? 'http://placehold.it/150x220&text=N/A'
+                      : $ctrl.details.Poster}}"
+          >
         </div>
-        <div class="inner-p">
-          <span class="label label-primary">Writer:</span> {{$ctrl.details.Writer}}
-        </div>
-        <div class="inner-p">
-          <span class="label label-primary">Starring:</span> {{$ctrl.details.Actors}}
-        </div>
-      </p>
 
-      <p class="outer-p-2">Ratings:
-        <br>
-        <strong>IMDb Rating</strong>: <span class="label label-success">{{ $ctrl.details.imdbRating }}</span>
-        <br>
-        <strong>Rotten Tomatoes</strong>: <span class="label label-success">{{ $ctrl.details.tomatoRating }}</span>
-      </p>
+        <div class="movie-info" flex="60" layout="column">
+          <span class="movie-title">
+            <a href="http://imdb.com/title/{{ $ctrl.details.imdbID }}" target="_blank">
+              {{$ctrl.details.Title}}
+            </a>
+            ({{$ctrl.details.Year}})
+          </span>
 
-      <p class="outer-p-3">
-        <md-button
-          ng-if="!$ctrl.movies[$ctrl.details.Title]"
-          ng-click="$ctrl.addMovie()"
-          class="md-raised md-primary"
-        >
-          Add to my List
-        </md-button>
-        <md-button
-          ng-if="$ctrl.movies[$ctrl.details.Title]"
-          ng-click="$ctrl.removeMovie()"
-          class="md-raised md-primary"
-        >
-          Remove from my List
-        </md-button>
-      </p>
+          <p>
+            {{$ctrl.details.Rated}}
+            <span class="divider">|</span>
+            {{$ctrl.details.Genre }}
+            <span class="divider">|</span>
+            {{$ctrl.details.Runtime}}
+            <span class="divider">|</span>
+            {{$ctrl.details.Released}}
+          </p>
+
+          <p>
+            <strong>Director</strong>: {{$ctrl.details.Director}}
+            <br>
+            <strong>Writer</strong>: {{$ctrl.details.Writer}}
+            <br>
+            <strong>Starring</strong>: {{$ctrl.details.Actors}}
+          </p>
+
+          <p>
+            <strong>IMDb Rating</strong>: {{$ctrl.details.imdbRating}}
+            <br>
+            <strong>Rotten Tomatoes</strong>: {{$ctrl.details.tomatoRating}}
+          </p>
+        </div>
+
+        <div flex="20" class="add-button">
+          <md-button
+            ng-if="!$ctrl.movies[$ctrl.details.Title]"
+            ng-click="$ctrl.addMovie()"
+            class="md-raised md-primary"
+          >
+            Add to my List
+          </md-button>
+          <md-button
+            ng-if="$ctrl.movies[$ctrl.details.Title]"
+            ng-click="$ctrl.removeMovie()"
+            class="md-raised md-primary"
+          >
+            Remove from my List
+          </md-button>
+        </div>
+      </div>
+
+      <div flex="60">{{ $ctrl.details.Plot }}</div>
     </div>
 
     <div ng-if="$ctrl.details.Response==='False'">
