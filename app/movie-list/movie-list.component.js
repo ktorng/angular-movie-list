@@ -7,6 +7,7 @@ angular
     templateUrl: 'movie-list/movie-list.template.html',
     controller: ['Movie', '$http',
       function MovieListController(Movie, $http) {
+        // object of movies for constant time lookup
         this.movies = Movie.all();
         this.search = {
           list: '',
@@ -14,12 +15,23 @@ angular
         };
         this.orderProp = 'title';
 
+        // search for new movie from omdb api
         this.fetchMovie = (title) => {
           $http.get(`http://www.omdbapi.com/?t=${this.search.new}&tomatoes=true&plot=full`)
             .then((response) => {
               this.details = response.data;
               console.log(this.details);
             });
+        };
+
+        // add movie to localStorage
+        this.addMovie = () => {
+          Movie.add(this.details);
+        };
+
+        // remove movie from localStorage
+        this.removeMovie = () => {
+          Movie.remove(this.details.Title);
         };
       }
     ]

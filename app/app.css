@@ -11,26 +11,28 @@ md-toolbar .md-button.md-default-theme {
   border-radius: 99%;
 }
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+.details {
+  padding: 10px;
 }
 
-.menu:before {
-  content: "[";
+.movie-poster {
+  float: left;
+  width: 150px;
+  margin-right: 10px;
 }
 
-.menu:after {
-  content: "]";
+.movie-title {
+  font-size: 20px;
 }
 
-.menu > li {
-  display: inline;
+.movie-title a {
+  text-decoration: none;
 }
 
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+.movie-title a:hover {
+  color: #BDBDBD;
+}
+
+.movie-info > span {
+  color: #BDBDBD;
 }

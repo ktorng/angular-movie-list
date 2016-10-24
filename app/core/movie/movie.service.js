@@ -4,18 +4,23 @@
 angular
   .module('core.movie')
   .factory('Movie', function(localStorageService) {
-    // movie list
-    const movieList = localStorageService.get('movies') || [];
+    // object of movies for constant time lookup
+    const movies = localStorageService.get('movies') || {};
 
     return {
-      // return list of movies
+      // return all movies
       all: function() {
-        return movieList;
+        return movies;
       },
-      // add new movie to movieList and sync with localStorage
+      // add new movie to movies and sync with localStorage
       add: function(formData) {
-        movieList.push(formData);
-        localStorageService.set('movies', movieList);
-      }
+        movies[formData.Title] = formData;
+        localStorageService.set('movies', movies);
+      },
+      // remove movie from movies using title as key and sync with localStorage
+      remove: function(title) {
+        delete movies[title];
+        localStorageService.set('movies', movies);
+      },
     };
   });

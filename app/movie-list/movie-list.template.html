@@ -31,12 +31,13 @@
     <md-list class="movies">
       <md-list-item class="movie-list-item"
           ng-repeat="movie in $ctrl.movies
+            | toArray
             | filter:$ctrl.search.list
             | orderBy:$ctrl.orderProp
             as filtered track by $index"
       >
-        <h4>{{movie.title}}</h4>
-        <p>Rating: {{movie.rating ? movie.rating + '/10' : 'unrated'}}</p>
+        <span>{{movie.myRating ? movie.myRating : 'N/A'}}</span>
+        <h4>{{movie.Title}}</h4>
       </li>
     </md-list>
 
@@ -55,33 +56,41 @@
   </md-sidenav>
 
   <!-- Movie details -->
-  <md-content flex id="content">
-    <div ng-if="$ctrl.details.Response==='True'">
+  <md-content flex class="details">
+    <div ng-if="$ctrl.details.Response === 'True'">
       <img
-        ng-src="{{ $ctrl.details.Poster === 'N/A'
-                   ? 'http://placehold.it/150x220&text=N/A'
-                   : $ctrl.details.Poster }}"
-        class="thumbnail animated flip movie-poster"
+        class="movie-poster"
+        ng-src="{{$ctrl.details.Poster === 'N/A'
+                  ? 'http://placehold.it/150x220&text=N/A'
+                  : $ctrl.details.Poster}}"
       >
-      <span class="span-outer">
+      <span class="movie-title">
         <a href="http://imdb.com/title/{{ $ctrl.details.imdbID }}" target="_blank">
-          {{ $ctrl.details.Title }}
+          {{$ctrl.details.Title}}
         </a>
-      </span> ({{ $ctrl.details.Year }})
+      </span> ({{$ctrl.details.Year}})
 
-      <p><strong>Released on:</strong> {{ $ctrl.details.Released }} ({{ $ctrl.details.Runtime }})</p>
+      <p class="movie-info">
+        {{$ctrl.details.Rated}}
+        <span>|</span>
+        {{$ctrl.details.Genre }}
+        <span>|</span>
+        {{$ctrl.details.Runtime}}
+        <span>|</span>
+        {{$ctrl.details.Released}}
+      </p>
 
       <p>{{ $ctrl.details.Plot }}</p>
 
       <p class="outer-p">
         <div class="inner-p">
-          <span class="label label-primary">Director:</span> {{ $ctrl.details.Director }}
+          <span class="label label-primary">Director:</span> {{$ctrl.details.Director}}
         </div>
         <div class="inner-p">
-          <span class="label label-primary">Starring:</span> {{ $ctrl.details.Actors }}
+          <span class="label label-primary">Writer:</span> {{$ctrl.details.Writer}}
         </div>
         <div class="inner-p">
-          <span class="label label-primary">Genre :</span> {{ $ctrl.details.Genre }}
+          <span class="label label-primary">Starring:</span> {{$ctrl.details.Actors}}
         </div>
       </p>
 
@@ -93,13 +102,20 @@
       </p>
 
       <p class="outer-p-3">
-        <a ng-href="https://www.youtube.com/results?search_query={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch Trailers!</a>
-        <span class="divider"></span>
-        <a ng-href="http://subscene.com/subtitles/title?q={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Get Subtitles!</a>
-        <span class="divider"></span>
-        <a ng-href="http://www.theost.com/search/custom/?key={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Hear Soundtracks!</a>
-        <span class="divider"></span>
-        <a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy this movie!</a>
+        <md-button
+          ng-if="!$ctrl.movies[$ctrl.details.Title]"
+          ng-click="$ctrl.addMovie()"
+          class="md-raised md-primary"
+        >
+          Add to my List
+        </md-button>
+        <md-button
+          ng-if="$ctrl.movies[$ctrl.details.Title]"
+          ng-click="$ctrl.removeMovie()"
+          class="md-raised md-primary"
+        >
+          Remove from my List
+        </md-button>
       </p>
     </div>
 
