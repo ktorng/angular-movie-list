@@ -5,7 +5,7 @@
     <span>My Movie List</span>
     <span flex></span> <!-- fill up area between heading and search -->
     <md-input-container>
-      <label>Add Movie</label>
+      <label>Enter full movie title</label>
       <input
         type="text"
         ng-model="$ctrl.search.new"
@@ -26,21 +26,6 @@
     md-component-id="left"
     md-is-locked-open="$mdMedia('gt-md')"
   >
-
-    <!-- List of movies with rating -->
-    <md-list class="movies">
-      <md-list-item class="movie-list-item"
-          ng-repeat="movie in $ctrl.movies
-            | toArray
-            | filter:$ctrl.search.list
-            | orderBy:$ctrl.orderProp
-            as filtered track by $index"
-      >
-        <span>{{movie.myRating ? movie.myRating : 'N/A'}}</span>
-        <h4>{{movie.Title}}</h4>
-      </li>
-    </md-list>
-
     <md-input-container>
       <label>Search List</label>
       <input type="text" ng-model="$ctrl.search.list" />
@@ -49,10 +34,25 @@
     <p>
       Sort by:
       <select ng-model="$ctrl.orderProp">
-        <option value="title">Title</option>
-        <option value="year">Release Year</option>
+        <option value="Title">Title</option>
+        <option value="-Released">Newest</option>
+        <option value="Released">Oldest</option>
       </select>
     </p>
+
+    <!-- List of movies with rating -->
+    <md-list class="movies">
+      <md-list-item class="movie-list-item"
+          ng-click="$ctrl.details = movie"
+          ng-repeat="movie in $ctrl.movies
+            | toArray
+            | filter:$ctrl.search.list
+            | orderBy:$ctrl.orderProp"
+      >
+        <span>{{movie.myRating ? movie.myRating : 'N/A'}}</span>
+        <h4>{{movie.Title}}</h4>
+      </li>
+    </md-list>
   </md-sidenav>
 
   <!-- Movie details -->
