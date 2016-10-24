@@ -1,23 +1,49 @@
-<!-- Container #1 (see wireframe) -->
-<md-toolbar>
-<h1>My Movie List</h1>
+<!-- Top toolbar with search and filter -->
+<md-toolbar class="md-tall md-hue-2">
+  <span flex></span> <!-- fill up top area -->
+  <div md-theme="light-on-dark" class="md-toolbar-tools">
+    <span>My Movie List</span>
+    <span flex></span> <!-- fill up area between heading and search -->
+    <md-input-container>
+      <label>Add Movie</label>
+      <input
+        type="text"
+        ng-model="$ctrl.search.new"
+        ng-keypress="($event.charCode === 13) ? $ctrl.fetchMovie() : 0"
+      />
+    </md-input-container>
+    <md-button class="md-icon-button" aria-label="Search" ng-click="$ctrl.fetchMovie()">
+      <ng-md-icon icon="search"></ng-md-icon>
+    </md-button>
+  </div>
 </md-toolbar>
 
-<!-- Container #2 -->
 <div flex layout="row">
-
-  <!-- Container #3 -->
+  <!-- Sidebar content -->
   <md-sidenav
     layout="column"
     class="md-sidenav-left md-whiteframe-z2"
     md-component-id="left"
     md-is-locked-open="$mdMedia('gt-md')"
   >
-    <!-- Sidebar content -->
-    <p>
-      Search:
-      <input ng-model="$ctrl.query" />
-    </p>
+
+    <!-- List of movies with rating -->
+    <md-list class="movies">
+      <md-list-item class="movie-list-item"
+          ng-repeat="movie in $ctrl.movies
+            | filter:$ctrl.search.list
+            | orderBy:$ctrl.orderProp
+            as filtered track by $index"
+      >
+        <h4>{{movie.title}}</h4>
+        <p>Rating: {{movie.rating ? movie.rating + '/10' : 'unrated'}}</p>
+      </li>
+    </md-list>
+
+    <md-input-container>
+      <label>Search List</label>
+      <input type="text" ng-model="$ctrl.search.list" />
+    </md-input-container>
 
     <p>
       Sort by:
@@ -28,26 +54,58 @@
     </p>
   </md-sidenav>
 
-  <!-- Container #4 -->
+  <!-- Movie details -->
   <md-content flex id="content">
-  <!-- Body content -->
-  <md-list class="movies">
-    <md-list-item class="movie-list-item"
-        ng-repeat="movie in $ctrl.movies
-          | filter:$ctrl.query
-          | orderBy:$ctrl.orderProp
-          as filtered track by $index"
-    >
-      <h4>{{movie.title}}</h4>
-      <p>Year: {{movie.year}}</p>
-      <p>Genre: {{movie.genre}}</p>
-      <p>Cast: {{movie.cast}}</p>
-      <p>Rating: {{movie.rating ? movie.rating + '/10' : 'unrated'}}</p>
-    </li>
-  </md-list>
+    <div ng-if="$ctrl.details.Response==='True'">
+      <img
+        ng-src="{{ $ctrl.details.Poster === 'N/A'
+                   ? 'http://placehold.it/150x220&text=N/A'
+                   : $ctrl.details.Poster }}"
+        class="thumbnail animated flip movie-poster"
+      >
+      <span class="span-outer">
+        <a href="http://imdb.com/title/{{ $ctrl.details.imdbID }}" target="_blank">
+          {{ $ctrl.details.Title }}
+        </a>
+      </span> ({{ $ctrl.details.Year }})
 
-  <p>Total number of movies: {{filtered.length}}</p>
+      <p><strong>Released on:</strong> {{ $ctrl.details.Released }} ({{ $ctrl.details.Runtime }})</p>
 
+      <p>{{ $ctrl.details.Plot }}</p>
+
+      <p class="outer-p">
+        <div class="inner-p">
+          <span class="label label-primary">Director:</span> {{ $ctrl.details.Director }}
+        </div>
+        <div class="inner-p">
+          <span class="label label-primary">Starring:</span> {{ $ctrl.details.Actors }}
+        </div>
+        <div class="inner-p">
+          <span class="label label-primary">Genre :</span> {{ $ctrl.details.Genre }}
+        </div>
+      </p>
+
+      <p class="outer-p-2">Ratings:
+        <br>
+        <strong>IMDb Rating</strong>: <span class="label label-success">{{ $ctrl.details.imdbRating }}</span>
+        <br>
+        <strong>Rotten Tomatoes</strong>: <span class="label label-success">{{ $ctrl.details.tomatoRating }}</span>
+      </p>
+
+      <p class="outer-p-3">
+        <a ng-href="https://www.youtube.com/results?search_query={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch Trailers!</a>
+        <span class="divider"></span>
+        <a ng-href="http://subscene.com/subtitles/title?q={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Get Subtitles!</a>
+        <span class="divider"></span>
+        <a ng-href="http://www.theost.com/search/custom/?key={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Hear Soundtracks!</a>
+        <span class="divider"></span>
+        <a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ $ctrl.details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy this movie!</a>
+      </p>
+    </div>
+
+    <div ng-if="$ctrl.details.Response==='False'">
+      No results found.
+    </div>
   </md-content>
 
 </div>

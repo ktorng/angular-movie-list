@@ -1,14 +1,14 @@
 /* app css stylesheet */
-[ng-cloak] {
-  display: none;
-}
-
 html, body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   height: 100%;
   margin: 0px;
   padding: 0px;
+}
+
+md-toolbar .md-button.md-default-theme {
+  border-radius: 99%;
 }
 
 .menu {

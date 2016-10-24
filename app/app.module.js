@@ -5,6 +5,7 @@ angular
   .module('myMovieList', [
     'ngRoute',
     'ngMaterial',
+    'ngMdIcons',
     'core',
     'LocalStorageModule',
     'movieList',
