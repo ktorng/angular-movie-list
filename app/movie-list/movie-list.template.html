@@ -35,22 +35,34 @@
       Sort by:
       <select ng-model="$ctrl.orderProp">
         <option value="Title">Title</option>
+        <option value="myRating">Rating</option>
         <option value="-Released">Newest</option>
-        <option value="Released">Oldest</option>
       </select>
     </p>
 
-    <!-- List of movies with rating -->
-    <md-list class="movies">
-      <md-list-item class="movie-list-item"
-          ng-click="$ctrl.details = movie"
-          ng-repeat="movie in $ctrl.movies
-            | toArray
-            | filter:$ctrl.search.list
-            | orderBy:$ctrl.orderProp"
+    <!-- List of movies and ratings -->
+    <md-list class="movie-list">
+      <md-list-item
+        class="movie-list-item"
+        layout="row"
+        ng-click="$ctrl.details = movie"
+        ng-repeat="movie in $ctrl.movies
+          | toArray
+          | filter:$ctrl.search.list
+          | orderBy:$ctrl.orderProp"
       >
-        <span>{{movie.myRating ? movie.myRating : 'N/A'}}</span>
-        <h4>{{movie.Title}}</h4>
+        <span
+          flex="10"
+          class="rating"
+          ng-class="{
+            'rating-high': movie.myRating >= 8,
+            'rating-med': movie.myRating >= 5 && movie.myRating < 8,
+            'rating-low': movie.myRating < 5,
+          }"
+        >
+          {{movie.myRating ? movie.myRating : 'N/A'}}
+        </span>
+        <p flex="90">{{movie.Title}}</p>
       </li>
     </md-list>
   </md-sidenav>
@@ -95,6 +107,20 @@
           </p>
 
           <p>
+            <strong>My Rating</strong>: {{$ctrl.details.myRating ? $ctrl.details.myRating : 'N/A'}}
+            <md-button aria-label="Rate" ng-click="$ctrl.toggleRate()">
+              <ng-md-icon icon="stars"></ng-md-icon>
+            </md-button>
+            <md-input-container ng-if="$ctrl.showRate">
+              <input
+                type="number"
+                min="0"
+                max="10"
+                step="0.1"
+                ng-keypress="($event.charCode === 13) ? $ctrl.submitRating() : 0"
+                ng-model="$ctrl.rating" />
+            </md-input-container>
+            <br>
             <strong>IMDb Rating</strong>: {{$ctrl.details.imdbRating}}
             <br>
             <strong>Rotten Tomatoes</strong>: {{$ctrl.details.tomatoRating}}

@@ -39,3 +39,32 @@ md-toolbar .md-button.md-default-theme {
 .movie-info .divider {
   color: #BDBDBD;
 }
+
+.movie-list-item .md-button {
+  padding: 5px !important;
+}
+
+.movie-list-item p {
+  padding-left: 10px;
+  font-weight: bold;
+  line-height: 16px;
+}
+
+.rating {
+  font-weight: bold;
+  text-align: center;
+}
+
+.rating-high {
+  background-color: #6c3;
+  color: white;
+}
+
+.rating-med {
+  background-color: #fc3;
+}
+
+.rating-low {
+  background-color: #f00;
+  color: white;
+}

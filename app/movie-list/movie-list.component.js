@@ -14,6 +14,7 @@ angular
           new: ''
         };
         this.orderProp = 'title';
+        this.showRate = false;
 
         // search for new movie from omdb api
         this.fetchMovie = (title) => {
@@ -33,6 +34,17 @@ angular
         this.removeMovie = () => {
           Movie.remove(this.details.Title);
         };
+
+        // toggle rating input
+        this.toggleRate = () => {
+          this.showRate = !this.showRate;
+        };
+
+        // rate currently viewed movie
+        this.submitRating = () => {
+          Movie.rate(this.details.Title, this.rating);
+          this.rating = '';
+        }
       }
     ]
   });

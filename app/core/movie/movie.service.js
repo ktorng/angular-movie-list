@@ -22,5 +22,10 @@ angular
         delete movies[title];
         localStorageService.set('movies', movies);
       },
+      // add a myRating property to a title and sync with localStorage
+      rate: function(title, rating) {
+        movies[title].myRating = rating;
+        localStorageService.set('movies', movies);
+      }
     };
   });
