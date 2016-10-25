@@ -22,6 +22,7 @@ angular
           $http.get(`http://www.omdbapi.com/?t=${this.search.new}&tomatoes=true&plot=full`)
             .then((response) => {
               this.details = response.data;
+              console.log(this.details)
             });
         };
 
@@ -39,6 +40,7 @@ angular
         // view details of movie clicked on in list
         this.viewDetails = (movie) => {
           this.details = movie;
+          this.activeTitle = movie.Title;
           this.showRate = false;
         };
 

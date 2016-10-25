@@ -58,6 +58,10 @@ md-toolbar .md-button.md-default-theme {
   color: #BDBDBD;
 }
 
+.nav-active {
+  background-color: #BDBDBD;
+}
+
 .movie-list-item .md-button {
   padding: 5px !important;
 }

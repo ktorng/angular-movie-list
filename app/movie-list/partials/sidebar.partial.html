@@ -1,0 +1,43 @@
+<!-- Search my list -->
+<md-input-container class="search-list">
+  <label>Search List</label>
+  <input type="text" ng-model="$ctrl.search.list" />
+</md-input-container>
+
+<!-- Sort my list -->
+<md-input-container class="sort-list">
+  <label>Sort by</label>
+  <md-select ng-model="$ctrl.orderProp">
+    <md-option value="Title">Title</md-option>
+    <md-option value="-myRating">Rating</md-option>
+    <md-option value="-Released">Newest</md-option>
+  </md-select>
+</md-input-container>
+
+<!-- List of movies and ratings -->
+<md-list class="movie-list">
+  <md-list-item
+    class="movie-list-item"
+    ng-class="{ 'nav-active': movie.Title === $ctrl.activeTitle }"
+    layout="row"
+    ng-click="$ctrl.viewDetails(movie)"
+    ng-repeat="movie in $ctrl.movies
+      | toArray
+      | filter:$ctrl.search.list
+      | orderBy:$ctrl.orderProp"
+  >
+    <span
+      flex="10"
+      class="rating"
+      ng-class="{
+        'rating-high': movie.myRating >= 8,
+        'rating-med': movie.myRating >= 5 && movie.myRating < 8,
+        'rating-low': movie.myRating >= 0 && movie.myRating < 5,
+        'rating-none': movie.myRating === -1
+      }"
+    >
+      {{movie.myRating > -1 ? movie.myRating : 'N/A'}}
+    </span>
+    <p flex="90">{{movie.Title}}</p>
+  </li>
+</md-list>
