@@ -50,12 +50,12 @@
           ng-if="!$ctrl.showRate"
           class="details-rating"
           ng-class="{
-            'details-rating-high': $ctrl.ratings[$ctrl.details.Title] >= 8,
-            'details-rating-med': $ctrl.ratings[$ctrl.details.Title] >= 5 && $ctrl.ratings[$ctrl.details.Title] < 8,
-            'details-rating-low': $ctrl.ratings[$ctrl.details.Title] >= 0 && $ctrl.ratings[$ctrl.details.Title] < 5,
+            'details-rating-high': $ctrl.ratings[$ctrl.details.imdbID] >= 8,
+            'details-rating-med': $ctrl.ratings[$ctrl.details.imdbID] >= 5 && $ctrl.ratings[$ctrl.details.imdbID] < 8,
+            'details-rating-low': $ctrl.ratings[$ctrl.details.imdbID] >= 0 && $ctrl.ratings[$ctrl.details.imdbID] < 5,
           }"
         >
-          {{$ctrl.ratings[$ctrl.details.Title] ? $ctrl.ratings[$ctrl.details.Title] : 'N/A'}}
+          {{$ctrl.ratings[$ctrl.details.imdbID] > -1 ? $ctrl.ratings[$ctrl.details.imdbID] : 'N/A'}}
         </span>
         <md-input-container ng-if="$ctrl.showRate" class="input-rating">
           <input
@@ -99,14 +99,14 @@
 
     <div flex="20" class="add-button">
       <md-button
-        ng-if="!$ctrl.movies[$ctrl.details.Title]"
+        ng-if="!$ctrl.movies[$ctrl.details.imdbID]"
         ng-click="$ctrl.addMovie()"
         class="md-raised md-primary"
       >
         Add to my List
       </md-button>
       <md-button
-        ng-if="$ctrl.movies[$ctrl.details.Title]"
+        ng-if="$ctrl.movies[$ctrl.details.imdbID]"
         ng-click="$ctrl.removeMovie()"
         class="md-raised md-warn"
       >

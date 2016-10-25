@@ -10,7 +10,7 @@
   <md-select ng-model="$ctrl.orderProp" ng-change="$ctrl.updateOrderProp()">
     <md-option value="Title">Title</md-option>
     <md-option value="-myRating">Rating</md-option>
-    <md-option value="-Released">Newest</md-option>
+    <md-option value="-Year">Newest</md-option>
   </md-select>
 </md-input-container>
 
@@ -36,7 +36,7 @@
         'rating-none': movie.myRating === -1
       }"
     >
-      {{movie.myRating > -1 ? movie.myRating : 'N/A'}}
+      {{movie.myRating >= 0 ? movie.myRating : 'N/A'}}
     </span>
     <p flex="90">{{movie.Title}} ({{movie.Year}})</p>
   </li>

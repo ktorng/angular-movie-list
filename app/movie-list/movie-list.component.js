@@ -74,7 +74,7 @@ angular
 
         // rate currently viewed movie
         this.submitRating = () => {
-          Movie.rate(this.details.Title, this.rating);
+          Movie.rate(this.details.imdbID, this.rating);
           this.showRate = false;
           this.rating = '';
         }

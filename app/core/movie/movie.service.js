@@ -28,23 +28,23 @@ angular
       },
       // add new movie to movies and sync with localStorage
       add: function(formData) {
-        movies[formData.Title] = formData;
+        movies[formData.imdbID] = formData;
         // if movie was previously rated, update movies
-        if (ratings[formData.Title]) {
-          movies[formData.Title].myRating = ratings[formData.Title];
+        if (ratings[formData.imdbID]) {
+          movies[formData.imdbID].myRating = ratings[formData.imdbID];
         }
         localStorageService.set('movies', movies);
       },
-      // remove movie from movies using title as key and sync with localStorage
-      remove: function(title) {
-        delete movies[title];
+      // remove movie from movies using imdbID as key and sync with localStorage
+      remove: function(imdbID) {
+        delete movies[imdbID];
         localStorageService.set('movies', movies);
       },
-      // add a myRating property to a title and sync with localStorage
+      // add a myRating property to a movie and sync with localStorage
       // also keep track of previously rated movies separately
-      rate: function(title, rating) {
-        if(movies[title]) movies[title].myRating = rating;
-        ratings[title] = rating;
+      rate: function(imdbID, rating) {
+        if (movies[imdbID]) movies[imdbID].myRating = rating;
+        ratings[imdbID] = rating;
         localStorageService.set('movies', movies);
         localStorageService.set('ratings', ratings);
       }
