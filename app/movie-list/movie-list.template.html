@@ -73,6 +73,10 @@
 
   <!-- Movie details -->
   <md-content flex class="details">
+    <div layout-fill layout="column" layout-align="center" class="empty" ng-show="($ctrl.movies | isEmpty) && !$ctrl.details">
+      There are no movies in your list! Search for and add some movies.
+    </div>
+
     <div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True'">
       <div flex="40" layout="row">
         <div flex="20">
@@ -180,7 +184,7 @@
         </div>
       </div>
 
-      <div flex="60">{{ $ctrl.details.Plot }}</div>
+      <div class="details-plot" flex="60">{{ $ctrl.details.Plot }}</div>
     </div>
 
     <div ng-if="$ctrl.details.Response==='False'">

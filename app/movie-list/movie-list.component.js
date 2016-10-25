@@ -33,6 +33,7 @@ angular
         // remove movie from localStorage
         this.removeMovie = () => {
           Movie.remove(this.details.Title);
+          this.details = false;
         };
 
         // view details of movie clicked on in list

@@ -34,6 +34,7 @@ md-toolbar .md-button.md-default-theme {
 
 .movie-poster {
   width: 100%;
+  max-height: 100%;
   margin-right: 10px;
 }
 
@@ -106,6 +107,10 @@ md-toolbar .md-button.md-default-theme {
   color: white;
 }
 
+.details-plot {
+  margin-top: 10px;
+}
+
 .details-rating {
   font-weight: bold;
   line-height: 24px;
@@ -121,4 +126,10 @@ md-toolbar .md-button.md-default-theme {
 
 .details-rating-low {
   color: #c00;
+}
+
+.empty {
+  text-align: center;
+  font-size: 32px;
+  color: #BDBDBD;
 }
