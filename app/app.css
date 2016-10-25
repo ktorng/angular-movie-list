@@ -7,10 +7,6 @@ html, body {
   padding: 0px;
 }
 
-md-toolbar .md-button.md-default-theme {
-  border-radius: 99%;
-}
-
 .search-new-movie {
   font-size: 16px;
 }

@@ -5,8 +5,8 @@ angular
   .module('movieList')
   .component('movieList', {
     templateUrl: 'movie-list/movie-list.template.html',
-    controller: ['Movie', '$http',
-      function MovieListController(Movie, $http) {
+    controller: ['Movie', '$http', '$mdSidenav',
+      function MovieListController(Movie, $http, $mdSidenav) {
         // object of movies for constant time lookup
         this.movies = Movie.all();
         this.ratings = Movie.ratings();
@@ -65,6 +65,7 @@ angular
           this.details = movie;
           this.activeImdbId = movie.imdbID;
           this.showRate = false;
+          $mdSidenav('left').close();
         };
 
         // toggle rating input
@@ -77,7 +78,12 @@ angular
           Movie.rate(this.details.imdbID, this.rating);
           this.showRate = false;
           this.rating = '';
-        }
+        };
+
+        // toggle left sidenav
+        this.toggleLeft = () => {
+          $mdSidenav('left').toggle();
+        };
       }
     ]
   });

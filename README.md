@@ -17,3 +17,4 @@ npm start
 ```
 
 Behind the scenes this will also call `npm install` and `bower install`.
+Navigate to [http://localhost:8000](http://localhost:8000).
