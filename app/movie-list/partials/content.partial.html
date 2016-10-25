@@ -118,7 +118,7 @@
   <div class="details-plot" flex="60">
     <strong>Synopsis:</strong> {{ $ctrl.details.Plot }}
 
-    <md-list class="related-list">
+    <md-list class="related-list" ng-if="$ctrl.details.related.length > 0">
       <strong>Similar Results:</strong>
       <md-list-item
         ng-repeat="movie in $ctrl.details.related"
