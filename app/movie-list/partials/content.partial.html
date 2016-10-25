@@ -3,6 +3,10 @@
   There are no movies in your list! Search for and add some movies.
 </div>
 
+<div layout-fill layout="column" layout-align="center" class="empty" ng-show="!($ctrl.movies | isEmpty) && !$ctrl.details">
+  Click on a movie in your list or search for new ones to get started.
+</div>
+
 <div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True'">
   <div flex="40" layout="row">
     <div flex="20">

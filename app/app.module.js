@@ -9,6 +9,5 @@ angular
     'core',
     'utils.autofocus',
     'LocalStorageModule',
-    'movieList',
-    'addMovie'
+    'movieList'
   ])
