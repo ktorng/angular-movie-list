@@ -18,13 +18,32 @@ angular
         this.showRate = false;
 
         // search for new movie from omdb api
-        this.fetchMovie = (title) => {
+        this.fetchMovie = () => {
           $http.get(`http://www.omdbapi.com/?t=${this.search.new}&tomatoes=true&plot=full`)
             .then((response) => {
               this.details = response.data;
-              console.log(this.details)
+              return $http.get(`http://www.omdbapi.com/?s=${this.search.new}`)
+            })
+            .then((response) => {
+              if (response.data.Response === 'True') {
+                this.details.related = response.data.Search.filter(res => res.Type === 'movie');
+              }
             });
         };
+
+        // updates search with new title
+        this.update = (imdbId, title) => {
+          $http.get(`http://www.omdbapi.com/?i=${imdbId}&tomatoes=true&plot=full`)
+            .then((response) => {
+              this.details = response.data;
+              return $http.get(`http://www.omdbapi.com/?s=${title}`)
+            })
+            .then((response) => {
+              if (response.data.Response === 'True') {
+                this.details.related = response.data.Search.filter(res => res.Type === 'movie');
+              }
+            });
+        }
 
         // add movie to localStorage
         this.addMovie = () => {

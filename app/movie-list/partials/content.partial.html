@@ -4,7 +4,7 @@
 </div>
 
 <div layout-fill layout="column" layout-align="center" class="empty" ng-show="!($ctrl.movies | isEmpty) && !$ctrl.details">
-  Click on a movie in your list or search for new ones to get started.
+  Click on a movie in your list to view details or search for new ones.
 </div>
 
 <div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True'">
@@ -115,9 +115,21 @@
     </div>
   </div>
 
-  <div class="details-plot" flex="60">{{ $ctrl.details.Plot }}</div>
+  <div class="details-plot" flex="60">
+    <strong>Synopsis:</strong> {{ $ctrl.details.Plot }}
+
+    <md-list class="related-list">
+      <strong>Similar Results:</strong>
+      <md-list-item
+        ng-repeat="movie in $ctrl.details.related"
+        ng-click="$ctrl.update(movie.imdbID, movie.Title)"
+      >
+        {{ movie.Title }} ({{movie.Year}})
+      </md-list-item>
+    </md-list>
+  </div>
 </div>
 
-<div ng-if="$ctrl.details.Response==='False'">
+<div layout-fill layout="column" layout-align="center" class="empty" ng-show="$ctrl.details.Response==='False'">
   No results found.
 </div>
