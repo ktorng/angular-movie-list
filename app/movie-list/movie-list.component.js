@@ -35,6 +35,12 @@ angular
           Movie.remove(this.details.Title);
         };
 
+        // view details of movie clicked on in list
+        this.viewDetails = (movie) => {
+          this.details = movie;
+          this.showRate = false;
+        };
+
         // toggle rating input
         this.toggleRate = () => {
           this.showRate = !this.showRate;
@@ -43,6 +49,7 @@ angular
         // rate currently viewed movie
         this.submitRating = () => {
           Movie.rate(this.details.Title, this.rating);
+          this.showRate = false;
           this.rating = '';
         }
       }

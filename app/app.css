@@ -11,6 +11,23 @@ md-toolbar .md-button.md-default-theme {
   border-radius: 99%;
 }
 
+.search-new-movie {
+  font-size: 16px;
+}
+
+.search-list, .sort-list {
+  width: 80%;
+  margin-left: 10px;
+}
+
+.search-new-movie .md-errors-spacer {
+  display:none;
+}
+
+.search-list .md-errors-spacer {
+  display:none;
+}
+
 .details {
   padding: 10px;
 }
@@ -50,6 +67,21 @@ md-toolbar .md-button.md-default-theme {
   line-height: 16px;
 }
 
+.button-show-rate {
+  min-width: 24px;
+  border-radius: 99%;
+  margin: 0;
+}
+
+.input-rating {
+  margin: 0;
+  width:40px;
+}
+
+.input-rating .md-errors-spacer {
+  display:none;
+}
+
 .rating {
   font-weight: bold;
   text-align: center;
@@ -72,4 +104,21 @@ md-toolbar .md-button.md-default-theme {
 .rating-none {
   background-color: #ccc;
   color: white;
+}
+
+.details-rating {
+  font-weight: bold;
+  line-height: 24px;
+}
+
+.details-rating-high {
+  color: #390;
+}
+
+.details-rating-med {
+  color: #c93;
+}
+
+.details-rating-low {
+  color: #c00;
 }

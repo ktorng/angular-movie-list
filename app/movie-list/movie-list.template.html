@@ -2,17 +2,18 @@
 <md-toolbar class="md-tall md-hue-2">
   <span flex></span> <!-- fill up top area -->
   <div md-theme="light-on-dark" class="md-toolbar-tools">
-    <span>My Movie List</span>
+    <h1>My Movie List</h1>
     <span flex></span> <!-- fill up area between heading and search -->
-    <md-input-container>
-      <label>Enter full movie title</label>
+    <md-input-container class="search-new-movie">
+      <label>Add new movie</label>
       <input
         type="text"
+        placeholder="Enter full movie title"
         ng-model="$ctrl.search.new"
         ng-keypress="($event.charCode === 13) ? $ctrl.fetchMovie() : 0"
       />
     </md-input-container>
-    <md-button class="md-icon-button" aria-label="Search" ng-click="$ctrl.fetchMovie()">
+    <md-button class="md-icon-button" aria-label="Search" ng-click="$ctrl.fetchMovie()" style="display:inline-block;">
       <ng-md-icon icon="search"></ng-md-icon>
     </md-button>
   </div>
@@ -26,26 +27,28 @@
     md-component-id="left"
     md-is-locked-open="$mdMedia('gt-md')"
   >
-    <md-input-container>
+    <!-- Search my list -->
+    <md-input-container class="search-list">
       <label>Search List</label>
       <input type="text" ng-model="$ctrl.search.list" />
     </md-input-container>
 
-    <p>
-      Sort by:
-      <select ng-model="$ctrl.orderProp">
-        <option value="Title">Title</option>
-        <option value="-myRating">Rating</option>
-        <option value="-Released">Newest</option>
-      </select>
-    </p>
+    <!-- Sort my list -->
+    <md-input-container class="sort-list">
+      <label>Sort by</label>
+      <md-select ng-model="$ctrl.orderProp">
+        <md-option value="Title">Title</md-option>
+        <md-option value="-myRating">Rating</md-option>
+        <md-option value="-Released">Newest</md-option>
+      </md-select>
+    </md-input-container>
 
     <!-- List of movies and ratings -->
     <md-list class="movie-list">
       <md-list-item
         class="movie-list-item"
         layout="row"
-        ng-click="$ctrl.details = movie"
+        ng-click="$ctrl.viewDetails(movie)"
         ng-repeat="movie in $ctrl.movies
           | toArray
           | filter:$ctrl.search.list
@@ -107,25 +110,56 @@
             <strong>Starring</strong>: {{$ctrl.details.Actors}}
           </p>
 
-          <p>
-            <strong>My Rating</strong>: {{$ctrl.details.myRating ? $ctrl.details.myRating : 'N/A'}}
-            <md-button aria-label="Rate" ng-click="$ctrl.toggleRate()">
-              <ng-md-icon icon="stars"></ng-md-icon>
-            </md-button>
-            <md-input-container ng-if="$ctrl.showRate">
+          <div class="details-rating">
+            <strong>My Rating</strong>:
+            <span
+              ng-if="!$ctrl.showRate"
+              class="details-rating"
+              ng-class="{
+                'details-rating-high': $ctrl.details.myRating >= 8,
+                'details-rating-med': $ctrl.details.myRating >= 5 && $ctrl.details.myRating < 8,
+                'details-rating-low': $ctrl.details.myRating >= 0 && $ctrl.details.myRating < 5,
+              }"
+            >
+              {{$ctrl.details.myRating > -1 ? $ctrl.details.myRating : 'N/A'}}
+            </span>
+            <md-input-container ng-if="$ctrl.showRate" class="input-rating">
               <input
                 type="number"
+                aria-label="Input Rating"
                 min="0"
                 max="10"
-                step="0.1"
                 ng-keypress="($event.charCode === 13) ? $ctrl.submitRating() : 0"
                 ng-model="$ctrl.rating" />
             </md-input-container>
+            <md-button aria-label="Rate" ng-click="$ctrl.toggleRate()" class="button-show-rate">
+              <ng-md-icon icon="stars"></ng-md-icon>
+            </md-button>
             <br>
-            <strong>IMDb Rating</strong>: {{$ctrl.details.imdbRating}}
+            <strong>IMDb Rating</strong>:
+            <span
+              class="details-rating"
+              ng-class="{
+                'details-rating-high': $ctrl.details.imdbRating >= 8,
+                'details-rating-med': $ctrl.details.imdbRating >= 5 && $ctrl.details.imdbRating < 8,
+                'details-rating-low': $ctrl.details.imdbRating < 5,
+              }"
+            >
+             {{$ctrl.details.imdbRating}}
+            </span>
             <br>
-            <strong>Rotten Tomatoes</strong>: {{$ctrl.details.tomatoRating}}
-          </p>
+            <strong>Rotten Tomatoes</strong>:
+            <span
+              class="details-rating"
+              ng-class="{
+                'details-rating-high': $ctrl.details.imdbRating >= 8,
+                'details-rating-med': $ctrl.details.imdbRating >= 5 && $ctrl.details.imdbRating < 8,
+                'details-rating-low': $ctrl.details.imdbRating < 5,
+              }"
+            >
+             {{$ctrl.details.tomatoRating}}
+            </span>
+          </div>
         </div>
 
         <div flex="20" class="add-button">
@@ -139,9 +173,9 @@
           <md-button
             ng-if="$ctrl.movies[$ctrl.details.Title]"
             ng-click="$ctrl.removeMovie()"
-            class="md-raised md-primary"
+            class="md-raised md-warn"
           >
-            Remove from my List
+            Remove
           </md-button>
         </div>
       </div>
