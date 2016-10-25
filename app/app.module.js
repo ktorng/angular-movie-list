@@ -7,6 +7,7 @@ angular
     'ngMaterial',
     'ngMdIcons',
     'core',
+    'utils.autofocus',
     'LocalStorageModule',
     'movieList',
     'addMovie'
