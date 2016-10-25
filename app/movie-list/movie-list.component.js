@@ -9,6 +9,7 @@ angular
       function MovieListController(Movie, $http) {
         // object of movies for constant time lookup
         this.movies = Movie.all();
+        this.ratings = Movie.ratings();
         this.search = {
           list: '',
           new: ''
@@ -21,7 +22,6 @@ angular
           $http.get(`http://www.omdbapi.com/?t=${this.search.new}&tomatoes=true&plot=full`)
             .then((response) => {
               this.details = response.data;
-              console.log(this.details);
             });
         };
 

@@ -6,15 +6,24 @@ angular
   .factory('Movie', function(localStorageService) {
     // object of movies for constant time lookup
     const movies = localStorageService.get('movies') || {};
+    const ratings = localStorageService.get('ratings') || {};
 
     return {
       // return all movies
       all: function() {
         return movies;
       },
+      // return all user input ratings
+      ratings: function() {
+        return ratings;
+      },
       // add new movie to movies and sync with localStorage
       add: function(formData) {
         movies[formData.Title] = formData;
+        // if movie was previously rated, update movies
+        if (ratings[formData.Title]) {
+          movies[formData.Title].myRating = ratings[formData.Title];
+        }
         localStorageService.set('movies', movies);
       },
       // remove movie from movies using title as key and sync with localStorage
@@ -23,9 +32,12 @@ angular
         localStorageService.set('movies', movies);
       },
       // add a myRating property to a title and sync with localStorage
+      // also keep track of previously rated movies separately
       rate: function(title, rating) {
-        movies[title].myRating = rating;
+        if(movies[title]) movies[title].myRating = rating;
+        ratings[title] = rating;
         localStorageService.set('movies', movies);
+        localStorageService.set('ratings', ratings);
       }
     };
   });

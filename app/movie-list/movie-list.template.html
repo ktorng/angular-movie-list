@@ -120,12 +120,12 @@
               ng-if="!$ctrl.showRate"
               class="details-rating"
               ng-class="{
-                'details-rating-high': $ctrl.details.myRating >= 8,
-                'details-rating-med': $ctrl.details.myRating >= 5 && $ctrl.details.myRating < 8,
-                'details-rating-low': $ctrl.details.myRating >= 0 && $ctrl.details.myRating < 5,
+                'details-rating-high': $ctrl.ratings[$ctrl.details.Title] >= 8,
+                'details-rating-med': $ctrl.ratings[$ctrl.details.Title] >= 5 && $ctrl.ratings[$ctrl.details.Title] < 8,
+                'details-rating-low': $ctrl.ratings[$ctrl.details.Title] >= 0 && $ctrl.ratings[$ctrl.details.Title] < 5,
               }"
             >
-              {{$ctrl.details.myRating > -1 ? $ctrl.details.myRating : 'N/A'}}
+              {{$ctrl.ratings[$ctrl.details.Title] ? $ctrl.ratings[$ctrl.details.Title] : 'N/A'}}
             </span>
             <md-input-container ng-if="$ctrl.showRate" class="input-rating">
               <input
@@ -136,7 +136,7 @@
                 ng-keypress="($event.charCode === 13) ? $ctrl.submitRating() : 0"
                 ng-model="$ctrl.rating" />
             </md-input-container>
-            <md-button aria-label="Rate" ng-click="$ctrl.toggleRate()" class="button-show-rate">
+            <md-button aria-label="Rate" title="Rate this movie" ng-click="$ctrl.toggleRate()" class="button-show-rate">
               <ng-md-icon icon="stars"></ng-md-icon>
             </md-button>
             <br>
