@@ -7,6 +7,7 @@ angular
     // object of movies for constant time lookup
     const movies = localStorageService.get('movies') || {};
     const ratings = localStorageService.get('ratings') || {};
+    const orderProp = localStorageService.get('orderProp') || 'Title';
 
     return {
       // return all movies
@@ -16,6 +17,14 @@ angular
       // return all user input ratings
       ratings: function() {
         return ratings;
+      },
+      // update order property and persist in localStorage
+      getOrderProp: function(prop) {
+        return orderProp;
+      },
+      // update order property and persist in localStorage
+      setOrderProp: function(prop) {
+        localStorageService.set('orderProp', prop);
       },
       // add new movie to movies and sync with localStorage
       add: function(formData) {

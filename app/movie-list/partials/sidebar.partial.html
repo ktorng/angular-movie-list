@@ -7,7 +7,7 @@
 <!-- Sort my list -->
 <md-input-container class="sort-list">
   <label>Sort by</label>
-  <md-select ng-model="$ctrl.orderProp">
+  <md-select ng-model="$ctrl.orderProp" ng-change="$ctrl.updateOrderProp()">
     <md-option value="Title">Title</md-option>
     <md-option value="-myRating">Rating</md-option>
     <md-option value="-Released">Newest</md-option>
@@ -18,7 +18,7 @@
 <md-list class="movie-list">
   <md-list-item
     class="movie-list-item"
-    ng-class="{ 'nav-active': movie.Title === $ctrl.activeTitle }"
+    ng-class="{ 'nav-active': movie.imdbID === $ctrl.activeImdbId }"
     layout="row"
     ng-click="$ctrl.viewDetails(movie)"
     ng-repeat="movie in $ctrl.movies

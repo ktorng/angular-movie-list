@@ -122,7 +122,7 @@
       <strong>Similar Results:</strong>
       <md-list-item
         ng-repeat="movie in $ctrl.details.related"
-        ng-click="$ctrl.update(movie.imdbID, movie.Title)"
+        ng-click="$ctrl.updateSearch(movie.imdbID, movie.Title)"
       >
         {{ movie.Title }} ({{movie.Year}})
       </md-list-item>

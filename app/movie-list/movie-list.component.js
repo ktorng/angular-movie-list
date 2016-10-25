@@ -14,8 +14,12 @@ angular
           list: '',
           new: ''
         };
-        this.orderProp = 'title';
+        this.orderProp = Movie.getOrderProp();
         this.showRate = false;
+
+        this.updateOrderProp = () => {
+          Movie.setOrderProp(this.orderProp);
+        }
 
         // search for new movie from omdb api
         this.fetchMovie = () => {
@@ -32,7 +36,7 @@ angular
         };
 
         // updates search with new title
-        this.update = (imdbId, title) => {
+        this.updateSearch = (imdbId, title) => {
           $http.get(`http://www.omdbapi.com/?i=${imdbId}&tomatoes=true&plot=full`)
             .then((response) => {
               this.details = response.data;
@@ -59,7 +63,7 @@ angular
         // view details of movie clicked on in list
         this.viewDetails = (movie) => {
           this.details = movie;
-          this.activeTitle = movie.Title;
+          this.activeImdbId = movie.imdbID;
           this.showRate = false;
         };
 
