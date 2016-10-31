@@ -87,9 +87,9 @@
         <span
           class="details-rating"
           ng-class="{
-            'details-rating-high': $ctrl.details.imdbRating >= 8,
-            'details-rating-med': $ctrl.details.imdbRating >= 5 && $ctrl.details.imdbRating < 8,
-            'details-rating-low': $ctrl.details.imdbRating < 5,
+            'details-rating-high': $ctrl.details.tomatoRating >= 8,
+            'details-rating-med': $ctrl.details.tomatoRating >= 5 && $ctrl.details.tomatoRating < 8,
+            'details-rating-low': $ctrl.details.tomatoRating < 5,
           }"
         >
          {{$ctrl.details.tomatoRating}}

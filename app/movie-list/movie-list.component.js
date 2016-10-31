@@ -56,7 +56,7 @@ angular
 
         // remove movie from localStorage
         this.removeMovie = () => {
-          Movie.remove(this.details.Title);
+          Movie.remove(this.details.imdbID);
           this.details = false;
         };
 
