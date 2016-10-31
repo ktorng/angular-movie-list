@@ -26,9 +26,6 @@ angular
         .when('/movies', {
           template: '<movie-list flex layout="column"></movie-list>'
         })
-        .when('/add-movie', {
-          template: '<add-movie flex layout="column"></add-movie>'
-        })
         .otherwise({redirectTo: '/movies'});
     }
   ]);

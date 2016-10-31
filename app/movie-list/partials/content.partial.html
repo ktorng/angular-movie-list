@@ -24,7 +24,7 @@
   layout="column"
   layout-align="center center"
   class="no-details"
-  ng-show="!$ctrl.details && $ctrl.isSearching"
+  ng-show="$ctrl.isSearching"
 >
   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
   Searching...
@@ -41,7 +41,7 @@
 </div>
 
 <div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True'">
-  <div flex="40" layout="row">
+  <div flex="40" layout-wrap layout="row">
     <div flex="20">
       <img
         class="movie-poster"
