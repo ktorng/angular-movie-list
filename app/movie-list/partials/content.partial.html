@@ -35,12 +35,12 @@
   layout="column"
   layout-align="center"
   class="no-details"
-  ng-show="$ctrl.details.Response==='False'"
+  ng-show="$ctrl.details.Response==='False' && !ctrl.isSearching"
 >
   No results found.
 </div>
 
-<div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True'">
+<div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True' && !$ctrl.isSearching">
   <div flex="40" layout-wrap layout="row">
     <div flex="20">
       <img

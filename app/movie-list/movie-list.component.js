@@ -5,8 +5,8 @@ angular
   .module('movieList')
   .component('movieList', {
     templateUrl: 'movie-list/movie-list.template.html',
-    controller: ['Movie', '$http', '$mdSidenav',
-      function MovieListController(Movie, $http, $mdSidenav) {
+    controller: ['Movie', '$mdSidenav',
+      function MovieListController(Movie, $mdSidenav) {
         // object of movies for constant time lookup
         this.movies = Movie.all();
         this.ratings = Movie.ratings();
@@ -26,33 +26,33 @@ angular
         this.fetchMovie = () => {
           this.isSearching = true;
           this.details = null;
-          $http.get(`http://www.omdbapi.com/?t=${this.search.new}&tomatoes=true&plot=full`)
+          Movie.omdbSearchByTitle(this.search.new)
             .then((response) => {
               this.details = response.data;
-              return $http.get(`http://www.omdbapi.com/?s=${this.search.new}`)
+              return Movie.omdbSearchRelated(this.search.new);
             })
             .then((response) => {
               if (response.data.Response === 'True') {
                 this.details.related = response.data.Search.filter(res => res.Type === 'movie');
-                this.isSearching = false;
               }
+              this.isSearching = false;
             });
         };
 
         // updates search with new title
-        this.updateSearch = (imdbId, title) => {
+        this.updateSearch = (imdbID, title) => {
           this.isSearching = true;
           this.details = null;
-          $http.get(`http://www.omdbapi.com/?i=${imdbId}&tomatoes=true&plot=full`)
+          Movie.omdbSearchByImdbID(imdbID)
             .then((response) => {
               this.details = response.data;
-              return $http.get(`http://www.omdbapi.com/?s=${title}`)
+              return Movie.omdbSearchRelated(this.search.new);
             })
             .then((response) => {
               if (response.data.Response === 'True') {
                 this.details.related = response.data.Search.filter(res => res.Type === 'movie');
-                this.isSearching = false;
               }
+              this.isSearching = false;
             });
         }
 
