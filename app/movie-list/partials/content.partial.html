@@ -1,10 +1,43 @@
 <!-- Movie details -->
-<div layout-fill layout="column" layout-align="center" class="empty" ng-show="($ctrl.movies | isEmpty) && !$ctrl.details">
+<div
+  layout-fill
+  layout="column"
+  layout-align="center"
+  class="no-details"
+  ng-show="($ctrl.movies | isEmpty) && !$ctrl.details && !$ctrl.isSearching"
+>
   There are no movies in your list! Search for and add some movies.
 </div>
 
-<div layout-fill layout="column" layout-align="center" class="empty" ng-show="!($ctrl.movies | isEmpty) && !$ctrl.details">
+<div
+  layout-fill
+  layout="column"
+  layout-align="center"
+  class="no-details"
+  ng-show="!($ctrl.movies | isEmpty) && !$ctrl.details && !$ctrl.isSearching"
+>
   Click on a movie in your list to view details or search for new ones.
+</div>
+
+<div
+  layout-fill
+  layout="column"
+  layout-align="center center"
+  class="no-details"
+  ng-show="!$ctrl.details && $ctrl.isSearching"
+>
+  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  Searching...
+</div>
+
+<div
+  layout-fill
+  layout="column"
+  layout-align="center"
+  class="no-details"
+  ng-show="$ctrl.details.Response==='False'"
+>
+  No results found.
 </div>
 
 <div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True'">
@@ -128,8 +161,4 @@
       </md-list-item>
     </md-list>
   </div>
-</div>
-
-<div layout-fill layout="column" layout-align="center" class="empty" ng-show="$ctrl.details.Response==='False'">
-  No results found.
 </div>

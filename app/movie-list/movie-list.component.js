@@ -16,6 +16,7 @@ angular
         };
         this.orderProp = Movie.getOrderProp();
         this.showRate = false;
+        this.isSearching = false;
 
         this.updateOrderProp = () => {
           Movie.setOrderProp(this.orderProp);
@@ -23,6 +24,8 @@ angular
 
         // search for new movie from omdb api
         this.fetchMovie = () => {
+          this.isSearching = true;
+          this.details = null;
           $http.get(`http://www.omdbapi.com/?t=${this.search.new}&tomatoes=true&plot=full`)
             .then((response) => {
               this.details = response.data;
@@ -31,12 +34,15 @@ angular
             .then((response) => {
               if (response.data.Response === 'True') {
                 this.details.related = response.data.Search.filter(res => res.Type === 'movie');
+                this.isSearching = false;
               }
             });
         };
 
         // updates search with new title
         this.updateSearch = (imdbId, title) => {
+          this.isSearching = true;
+          this.details = null;
           $http.get(`http://www.omdbapi.com/?i=${imdbId}&tomatoes=true&plot=full`)
             .then((response) => {
               this.details = response.data;
@@ -45,6 +51,7 @@ angular
             .then((response) => {
               if (response.data.Response === 'True') {
                 this.details.related = response.data.Search.filter(res => res.Type === 'movie');
+                this.isSearching = false;
               }
             });
         }
