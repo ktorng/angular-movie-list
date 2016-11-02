@@ -6,11 +6,11 @@ angular
   .config([
     '$mdThemingProvider',
     function($mdThemingProvider) {
-      // Dark theme with light foreground
       $mdThemingProvider
         .theme('default')
         .primaryPalette('teal');
 
+      // Dark theme with light foreground
       $mdThemingProvider
         .theme('light-on-dark')
         .dark();

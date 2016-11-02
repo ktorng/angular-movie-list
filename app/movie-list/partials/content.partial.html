@@ -42,7 +42,7 @@
 
 <div layout-fill layout="column" ng-if="$ctrl.details.Response === 'True' && !$ctrl.isSearching">
   <div flex="40" layout-wrap layout="row">
-    <div flex="20">
+    <div flex="20" layout-wrap layout="column">
       <img
         class="movie-poster"
         ng-src="{{$ctrl.details.Poster === 'N/A'

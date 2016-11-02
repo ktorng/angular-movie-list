@@ -18,7 +18,7 @@
 <md-list class="movie-list">
   <md-list-item
     class="movie-list-item"
-    ng-class="{ 'nav-active': movie.imdbID === $ctrl.activeImdbId }"
+    ng-class="{ 'nav-active': movie.imdbID === $ctrl.activeImdbID }"
     layout="row"
     ng-click="$ctrl.viewDetails(movie)"
     ng-repeat="movie in $ctrl.movies

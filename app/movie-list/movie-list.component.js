@@ -29,6 +29,7 @@ angular
           Movie.omdbSearchByTitle(this.search.new)
             .then((response) => {
               this.details = response.data;
+              this.activeImdbID = this.details.imdbID;
               return Movie.omdbSearchRelated(this.search.new);
             })
             .then((response) => {
@@ -46,6 +47,7 @@ angular
           Movie.omdbSearchByImdbID(imdbID)
             .then((response) => {
               this.details = response.data;
+              this.activeImdbID = this.details.imdbID;
               return Movie.omdbSearchRelated(this.search.new);
             })
             .then((response) => {
@@ -70,7 +72,7 @@ angular
         // view details of movie clicked on in list
         this.viewDetails = (movie) => {
           this.details = movie;
-          this.activeImdbId = movie.imdbID;
+          this.activeImdbID = movie.imdbID;
           this.showRate = false;
           $mdSidenav('left').close();
         };
